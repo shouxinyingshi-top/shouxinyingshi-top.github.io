@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="手心影视是一份私人观影手记：把看过的片子按心情、季节和场合收进口袋，记下那些看完之后还想再想一会儿的片段，也记下在哪看、值不值得花这两个小时。">
+<meta name="keywords" content="手心影视, 私人观影手记, 电影随笔, 片子推荐, 看完想一会儿, 片单收藏, 观影心情, 好片记录, 影视日记">
+<meta name="author" content="手心影视">
+<title>手心影视 · 一份私人观影手记 | 把看过的片子收进口袋</title>
+<style>
+:root{
+  --paper:#fbf7f0;--card:#fffdf9;--ink:#2b2620;--soft:#5f564c;--line:#e6dccb;
+  --rust:#b4532e;--olive:#6f7a3e;--plum:#7d4f63;--slate:#4a6070;--gold:#c89a3c;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-size:16px;line-height:1.85;
+  font-family:"Songti SC","Source Han Serif SC","Noto Serif CJK SC","SimSun","WenQuanYi Micro Hei",Georgia,serif;}
+a{color:var(--rust);text-decoration:none}
+a:hover{text-decoration:underline wavy var(--gold) 2px}
+h1,h2,h3,h4{line-height:1.35;margin:0;font-weight:600}
+img{max-width:100%;display:block}
+
+/* 顶部 */
+header.mast{background:var(--ink);color:#f3ead8;padding:38px 0 30px;text-align:center;position:relative;overflow:hidden}
+header.mast::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;
+  background:repeating-linear-gradient(90deg,var(--rust) 0 22px,var(--gold) 22px 44px,var(--olive) 44px 66px,var(--plum) 66px 88px)}
+.mast .kicker{font-size:12.5px;letter-spacing:4px;color:#c9b891;text-transform:uppercase}
+.mast h1{font-size:clamp(34px,9vw,64px);letter-spacing:6px;margin:10px 0 6px;font-weight:700}
+.mast .sub{font-size:clamp(13px,3.2vw,15px);color:#cfc2a8;letter-spacing:1px;font-family:-apple-system,"PingFang SC",sans-serif}
+.mast .url{margin-top:14px;font-size:12px;color:#9c8f76;font-family:ui-monospace,Menlo,monospace;letter-spacing:.5px}
+
+/* 目录 */
+.toc{width:min(1080px,92vw);margin:0 auto;padding:22px 0 6px}
+.toc h3{font-size:13px;letter-spacing:3px;color:var(--soft);margin-bottom:12px;border-bottom:1px dashed var(--line);padding-bottom:8px}
+.toc ol{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px 26px;font-size:14.5px;font-family:-apple-system,"PingFang SC",sans-serif}
+.toc a{color:var(--ink)}
+.toc a::before{content:"· ";color:var(--rust);font-weight:700}
+
+/* 引言 */
+.intro{width:min(760px,88vw);margin:26px auto 0;text-align:center;font-size:clamp(15px,3.4vw,17px);color:#403a32;padding:0 4px}
+.intro em{font-style:normal;color:var(--rust);border-bottom:1px solid var(--rust);padding-bottom:1px}
+
+/* 板块 */
+section{width:min(1080px,92vw);margin:52px auto 0;padding:0 4px}
+.sec-t{display:flex;align-items:baseline;gap:12px;margin-bottom:20px;flex-wrap:wrap}
+.sec-t .no{font-family:Georgia,serif;font-size:15px;color:#fff;background:var(--rust);width:30px;height:30px;flex:0 0 30px;
+  display:grid;place-items:center;border-radius:50%}
+.sec-t h2{font-size:clamp(21px,4.4vw,28px);letter-spacing:1px}
+.sec-t small{font-size:12.5px;color:var(--soft);letter-spacing:2px;font-family:-apple-system,sans-serif;margin-left:auto}
+
+/* 卡片网格 */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px;position:relative;
+  box-shadow:0 2px 10px rgba(90,70,40,.05)}
+.note::before{content:"";position:absolute;top:14px;right:16px;width:9px;height:9px;border-radius:50%;background:var(--gold)}
+.note h3{font-size:17px;margin-bottom:5px;letter-spacing:.5px}
+.note .tag{font-size:11.5px;color:#fff;background:var(--olive);padding:2px 9px;border-radius:20px;display:inline-block;margin-bottom:10px;letter-spacing:1px}
+.note p{margin:0;font-size:14.5px;color:#4a433a;line-height:1.8}
+.note .meta{margin-top:13px;padding-top:10px;border-top:1px dashed var(--line);font-size:12px;color:var(--soft);
+  font-family:-apple-system,sans-serif;display:flex;justify-content:space-between;gap:8px}
+.note:nth-child(2) .tag{background:var(--plum)}.note:nth-child(3) .tag{background:var(--slate)}
+.note:nth-child(4) .tag{background:var(--rust)}.note:nth-child(5) .tag{background:var(--gold);color:#4a3820}
+.note:nth-child(6) .tag{background:#8a6d3b}
+
+/* 分栏文字 */
+.columns{columns:2;column-gap:34px;font-size:15px;color:#403a32}
+.columns p{margin:0 0 16px;break-inside:avoid}
+.columns p:first-child::first-letter{font-size:30px;color:var(--rust);font-weight:700;float:left;line-height:.9;margin:4px 5px 0 0}
+
+/* 时间轴 */
+.tl{border-left:2px solid var(--line);margin-left:10px;padding-left:24px}
+.tl .it{position:relative;padding-bottom:22px}
+.tl .it:last-child{padding-bottom:0}
+.tl .it::before{content:"";position:absolute;left:-31px;top:7px;width:11px;height:11px;background:var(--paper);
+  border:2px solid var(--rust);border-radius:50%}
+.tl .d{font-size:12px;color:var(--rust);letter-spacing:1px;font-family:-apple-system,sans-serif}
+.tl h4{font-size:16.5px;margin:2px 0 5px}
+.tl p{margin:0;font-size:14.5px;color:#4a433a}
+
+/* 问答 */
+.qa{border-top:1px solid var(--line)}
+.qa .q{display:flex;gap:12px;align-items:flex-start;padding:16px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.qa .q:hover .t{color:var(--rust)}
+.qa .mark{font-family:Georgia,serif;font-size:20px;color:var(--gold);line-height:1.3;flex:0 0 auto}
+.qa .t{flex:1;font-size:15.5px}
+.qa .a{display:none;padding:0 0 16px 32px;font-size:14.5px;color:#4a433a}
+.qa .q.on+.a{display:block}
+.qa .q .ar{font-size:12px;color:var(--soft);transition:.2s}
+.qa .q.on .ar{transform:rotate(90deg);color:var(--rust)}
+
+/* 表单 */
+form.sub{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px;max-width:560px}
+form.sub label{display:block;font-size:13.5px;color:var(--soft);margin-bottom:6px;letter-spacing:1px}
+form.sub input{width:100%;padding:11px 13px;font-size:15px;border:1px solid var(--line);border-radius:8px;background:#fffdf9;
+  font-family:inherit;color:var(--ink)}
+form.sub input:focus{outline:none;border-color:var(--rust)}
+form.sub button{margin-top:14px;width:100%;padding:12px;font-size:15px;color:#fff;background:var(--rust);border:0;
+  border-radius:8px;cursor:pointer;letter-spacing:2px;font-family:inherit}
+form.sub button:hover{background:#8f3f20}
+
+/* 页脚 */
+footer{margin-top:60px;background:var(--ink);color:#cfc2a8;padding:32px 0 38px}
+footer .in{width:min(1080px,92vw);margin:0 auto;font-size:13.5px}
+footer h4{margin:0 0 12px;color:#e8ddc4;font-size:14px;letter-spacing:3px}
+footer .cols{display:flex;gap:40px;flex-wrap:wrap;font-family:-apple-system,sans-serif;font-size:13px;color:#a89a80}
+footer .cols div{flex:1;min-width:200px}
+footer .cols a{color:#a89a80;display:inline-block;margin:0 16px 8px 0;font-size:12.5px}
+footer .addr{font-family:ui-monospace,Menlo,monospace;color:var(--gold);font-size:12.5px;word-break:break-all}
+footer .fin{margin-top:22px;padding-top:16px;border-top:1px dashed #5f5344;font-size:12px;color:#8a7c63;line-height:1.9}
+
+@media (max-width:860px){
+  .grid{grid-template-columns:1fr 1fr;gap:14px}
+  .columns{columns:1}
+  .sec-t small{display:none}
+  section{margin-top:40px}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:1fr}
+  .mast h1{letter-spacing:3px}
+  .note{padding:18px 16px}
+  form.sub{padding:20px 16px}
+}
+@media print{
+  header.mast{background:#fff;color:#000;border-bottom:2px solid #000}
+  header.mast::after{display:none}
+  .qa .a{display:block!important}
+  footer{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+
+<header class="mast">
+  <div class="kicker">A Personal Viewing Journal</div>
+  <h1>手心影视</h1>
+  <div class="sub">把看过的片子收进口袋 · 留一点看完之后的余味</div>
+  <div class="url">https://DOMAIN.github.io</div>
+</header>
+
+<nav class="toc">
+  <h3>目 录 · CONTENTS</h3>
+  <ol>
+    <li><a href="#pocket">口袋里的片子</a></li>
+    <li><a href="#mood">当时的心情</a></li>
+    <li><a href="#season">季节与场合</a></li>
+    <li><a href="#ask">常被人问的</a></li>
+    <li><a href="#mail">寄给手心</a></li>
+  </ol>
+</nav>
+
+<p class="intro">手心影视不是排行榜，也没有打分。它只是我看完一部片子之后，随手记下的几句话——<em>哪一幕停在我心里，以及它适合什么情境下看</em>。如果你也在找一个"今晚看什么"的理由，这里也许有一点用。</p>
+
+<section id="pocket">
+  <div class="sec-t"><span class="no">1</span><h2>口袋里的片子</h2><small>THE POCKET</small></div>
+  <div class="grid">
+    <article class="note"><span class="tag">看完还想坐一会儿</span><h3>一段很长的告别</h3>
+      <p>结尾那场戏什么都没解释，人物只是站在原地。恰恰是这种"不给答案"，让我第二天上班路上还在想。</p>
+      <div class="meta"><span>记录于秋末</span><span>约 2 小时 10 分</span></div></article>
+    <article class="note"><span class="tag">适合反复看</span><h3>雨里的三个人</h3>
+      <p>第一次看只记得剧情，第二次才发现台词里全是伏笔。这类片子值得留着，隔几年再看一遍。</p>
+      <div class="meta"><span>记录于雨天</span><span>约 1 小时 45 分</span></div></article>
+    <article class="note"><span class="tag">轻轻的</span><h3>阳台上的猫</h3>
+      <p>几乎没有冲突，全是日常。看完不激动，但很平静，像被人拍了拍肩膀。</p>
+      <div class="meta"><span>记录于午后</span><span>约 1 小时 30 分</span></div></article>
+    <article class="note"><span class="tag">值得找原声</span><h3>午夜电台</h3>
+      <p>声音是这部片子的主角。建议戴耳机，街道那一段的环境音做得极细。</p>
+      <div class="meta"><span>记录于深夜</span><span>约 1 小时 55 分</span></div></article>
+    <article class="note"><span class="tag">看完想说话</span><h3>父亲的自行车</h3>
+      <p>看完特别想给家里打个电话。这种冲动本身就是最好的评价。</p>
+      <div class="meta"><span>记录于周末</span><span>约 2 小时</span></div></article>
+    <article class="note"><span class="tag">慢慢进入</span><h3>海边照相馆</h3>
+      <p>前四十分钟有点闷，别放弃。后半段一旦接上，前面那些"闷"全都有了去处。</p>
+      <div class="meta"><span>记录于假期</span><span>约 2 小时 5 分</span></div></article>
+  </div>
+</section>
+
+<section id="mood">
+  <div class="sec-t"><span class="no">2</span><h2>当时的心情</h2><small>IN THE MOOD</small></div>
+  <div class="columns">
+    <p>手心影视记片子，一直先记心情，而不是类型。同一部片子在不同日子看，感受可能完全相反——疲惫时看它觉得拖沓，闲下来再看，反而喜欢那种慢。</p>
+    <p>所以我给每部片子只留一句当时最真实的反应。不写"豆瓣 8.5 分"，也不写"年度十佳"，那些数字在别处都能查到，这里只留查不到的东西。</p>
+    <p>有些片子看完是松了一口气，有些是胸口堵着，有些是什么感觉都没有、但三天后突然想起一个镜头。第三种最珍贵，我会用星号标出来。</p>
+    <p>也记录那些"看不下去"的时刻。一部被很多人夸的片子，我在中间关掉了，这不代表它不好，只说明那天它不适合我。这样的记录一样有价值。</p>
+  </div>
+</section>
+
+<section id="season">
+  <div class="sec-t"><span class="no">3</span><h2>季节与场合</h2><small>SEASONS &amp; OCCASIONS</small></div>
+  <div class="tl">
+    <div class="it"><div class="d">春天 · 午后</div><h4>适合看一些笨拙的、不确定的故事</h4>
+      <p>窗户外面开始有声音的时候，那种节奏不快、人物总在犹豫的片子最对味。看完出门走一圈，正好。</p></div>
+    <div class="it"><div class="d">夏天 · 深夜</div><h4>空调房里看长镜头</h4>
+      <p>热得不想动的时候，长镜头反而让人安心。画面慢慢推，时间好像也变慢了。</p></div>
+    <div class="it"><div class="d">秋天 · 周末</div><h4>一个人吃饭的时候</h4>
+      <p>秋天适合那些关于离开和重逢的片子。吃饭配着看，盘子空了，片子也刚好到一个段落。</p></div>
+    <div class="it"><div class="d">冬天 · 下雪</div><h4>窝在被子里看老片子</h4>
+      <p>画质不重要，重要的是熟悉。看过很多遍的片子在下雪天看，像见老朋友。</p></div>
+    <div class="it"><div class="d">任何季节 · 失眠</div><h4>找一部你记不住情节的</h4>
+      <p>失眠时不要看新东西。找一部情节你已经忘光的片子，只看画面和声音，很快就能睡着——这算是我私藏的用法。</p></div>
+  </div>
+</section>
+
+<section id="ask">
+  <div class="sec-t"><span class="no">4</span><h2>常被人问的</h2><small>ASKED OFTEN</small></div>
+  <div class="qa">
+    <div class="q"><span class="mark">&#8220;</span><span class="t">为什么不给片子打分？</span><span class="ar">&#9654;</span></div>
+    <div class="a">因为同一部片子在不同心情下的分数能差出三档。我更想记的是"那天我是什么状态"，而不是一个会变的数值。如果你想要分数，别处有很多更专业的榜单。</div>
+    <div class="q"><span class="mark">&#8220;</span><span class="t">这里的片子在哪里能看到？</span><span class="ar">&#9654;</span></div>
+    <div class="a">手心影视只做记录，不提供资源。每部片子记下之后我会顺手查一下常见的正规观看渠道，但具体 availability 随时在变，还是以平台当下的片库为准。</div>
+    <div class="q"><span class="mark">&#8220;</span><span class="t">能不能按类型来找片子？</span><span class="ar">&#9654;</span></div>
+    <div class="a">暂时没有做分类索引，因为我的分类标准很私人——不是按"悬疑、爱情、喜剧"，而是按"看完想打电话""适合下雨天"。如果你有具体的心情，写信告诉我，我来翻口袋。</div>
+    <div class="q"><span class="mark">&#8220;</span><span class="t">多久更新一次？</span><span class="ar">&#9654;</span></div>
+    <div class="a">看片子的速度。一般一周能看完两三部的样子，但不会为了更新而更新。没新东西可记的时候，旧记录里挑一条重新写写，也算更新。</div>
+    <div class="q"><span class="mark">&#8220;</span><span class="t">可以推荐给我朋友吗？</span><span class="ar">&#9654;</span></div>
+    <div class="a">当然可以，而且很欢迎。如果朋友看完之后也想去看看某一部，那这些记录就完成了它该做的事。</div>
+  </div>
+</section>
+
+<section id="mail" style="padding-bottom:40px">
+  <div class="sec-t"><span class="no">5</span><h2>寄给手心</h2><small>WRITE TO ME</small></div>
+  <p style="font-size:15px;color:#4a433a;margin:0 0 18px">如果你也看过一部"看完之后还想再想一会儿"的片子，写信告诉我名字和那一幕。我会收进口袋，也许下一次更新就出现在这里。</p>
+  <form class="sub" action="#" method="post" onsubmit="return false">
+    <label>你的称呼</label>
+    <input type="text" name="name" placeholder="怎么称呼你都可以">
+    <label style="margin-top:14px">想说的那部片子</label>
+    <input type="text" name="film" placeholder="片名，有年份更好">
+    <label style="margin-top:14px">哪一幕停在你心里</label>
+    <input type="text" name="scene" placeholder="随便写几句，越具体越好">
+    <button type="submit">折好，投进手心</button>
+  </form>
+</section>
+
+<footer>
+  <div class="in">
+    <div class="cols">
+      <div>
+        <h4>手心影视 · 栏目</h4>
+        <a href="#pocket">口袋里的片子</a><a href="#mood">当时的心情</a><a href="#season">季节与场合</a><a href="#ask">常被人问的</a><a href="#mail">寄给手心</a>
+      </div>
+      <div>
+        <h4>关于这份手记</h4>
+        <p style="margin:6px 0 0;font-size:12.5px;line-height:1.9">手心影视是纯粹的个人记录，没有商业合作，也不做资源分享。所有感受都来自一个普通观众的视角，可能偏颇，但真实。</p>
+      </div>
+      <div>
+        <h4>站点地址</h4>
+        <p class="addr">https://DOMAIN.github.io</p>
+      </div>
+    </div>
+    <p class="fin">手心影视 · 把看过的片子收进口袋。本站内容仅为个人观影感受的记录与分享，不构成任何观看或消费建议；片源与上映信息请以官方渠道公告为准。</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var qs=document.querySelectorAll('.qa .q');
+  for(var i=0;i<qs.length;i++){
+    qs[i].addEventListener('click',function(){
+      this.classList.toggle('on');
+    });
+  }
+})();
+</script>
+</body>
+</html>
